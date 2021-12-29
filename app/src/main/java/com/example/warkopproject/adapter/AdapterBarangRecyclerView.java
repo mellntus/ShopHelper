@@ -7,17 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.warkopproject.CreateStockActivity;
+import com.example.warkopproject.page.home.CreateStockActivity;
 import com.example.warkopproject.MainActivity;
 import com.example.warkopproject.R;
 import com.example.warkopproject.model.Barang;
-import com.example.warkopproject.page.home.HomeFragment;
 
 import java.util.ArrayList;
 
@@ -33,8 +31,6 @@ public class AdapterBarangRecyclerView extends
         context = ctx;
         listener = (MainActivity)ctx;
     }
-
-
 
     @NonNull
     @Override
@@ -52,7 +48,7 @@ public class AdapterBarangRecyclerView extends
             @Override
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.dialog_view);
+                dialog.setContentView(R.layout.barang_dialog_view);
                 dialog.show();
 
                 Button editButton = (Button)
@@ -73,9 +69,7 @@ public class AdapterBarangRecyclerView extends
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
-                        listener.onDeleteData(daftarBarang.get(position),
-
-                                position);
+                        listener.onDeleteData(daftarBarang.get(position),position);
                     }
                 });
             }
@@ -88,6 +82,7 @@ public class AdapterBarangRecyclerView extends
         });
         holder.tvTitle.setText(barang.getNamaBarang());
         holder.tvStock.setText(barang.getStockBarang().toString());
+        holder.tvCategory.setText(barang.getKategoriBarang());
 
 //        holder.tvTitle.setText(daftarBarang.get(position).getNamaBarang());
     }
@@ -98,10 +93,11 @@ public class AdapterBarangRecyclerView extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle,tvStock, edit;
+        TextView tvTitle,tvCategory,tvStock, edit;
 
         ViewHolder(View v) {
             super(v);
+            tvCategory = (TextView) v.findViewById(R.id.tv_barangCategory);
             tvTitle = (TextView) v.findViewById(R.id.tv_namabarang);
             tvStock = (TextView) v.findViewById(R.id.tv_stockBarangCard);
             edit = (TextView) v.findViewById(R.id.editButton);

@@ -4,89 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".page.home.CreateStockActivity">
+    tools:context=".page.menu.CreateMenuActivity">
+
 
     <TextView
-        android:id="@+id/tv_namaBarang"
+        android:id="@+id/tv_namaMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
-        android:text="Nama Barang"
+        android:text="Nama Menu"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_JenisBarang"
+        android:id="@+id/tv_kategoriMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="32dp"
-        android:text="Kategori Barang"
+        android:layout_marginTop="26dp"
+        android:text="Kategori Menu"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_namaBarang" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_namaMenu" />
 
     <TextView
-        android:id="@+id/tv_StockBarang"
+        android:id="@+id/tv_hargaMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="32dp"
-        android:text="Stock Barang"
+        android:text="hargaMenu"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_JenisBarang" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_kategoriMenu" />
 
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/btnAddMenu"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:background="@drawable/btn_register"
-        android:text="Add Item"
+        android:text="Save Menu"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_StockBarang" />
+        app:layout_constraintTop_toBottomOf="@+id/input_hargaMenu" />
 
-    <EditText
-        android:id="@+id/input_NamaBarang"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spin_namaMenu"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="45dp"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_namaBarang"
+        app:layout_constraintStart_toEndOf="@+id/tv_namaMenu"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spin_jenisBarang"
+        android:id="@+id/spin_kategoriMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:entries="@array/kategori"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input_NamaBarang"
-        app:layout_constraintTop_toBottomOf="@+id/input_NamaBarang" />
+        android:layout_marginTop="19dp"
+        android:entries="@array/kategori_menu"
+        app:layout_constraintStart_toStartOf="@+id/spin_namaMenu"
+        app:layout_constraintTop_toBottomOf="@+id/spin_namaMenu" />
 
     <EditText
-        android:id="@+id/input_StockBarang"
+        android:id="@+id/input_hargaMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/input_NamaBarang"
-        app:layout_constraintTop_toBottomOf="@+id/spin_jenisBarang" />
+        app:layout_constraintStart_toStartOf="@+id/spin_namaMenu"
+        app:layout_constraintTop_toBottomOf="@+id/spin_kategoriMenu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

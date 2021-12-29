@@ -1,4 +1,4 @@
-package com.example.warkopproject.page.listMenu;
+package com.example.warkopproject.page.order;
 
 import android.os.Bundle;
 
@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.warkopproject.R;
 
-public class ListFragment extends Fragment {
+
+public class OrderFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,6 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        return inflater.inflate(R.layout.fragment_stock, container, false);
     }
 }

@@ -81,8 +81,17 @@ public class RegisterActivity extends AppCompatActivity {
         String alamatToko = binding.inputAlamatToko.getText().toString();
         String namaToko = binding.inputNamaToko.getText().toString();
 
-        signUp(email, password, name, nomorTelepon, alamatToko, namaToko);
+        if(!isEmpty(email) || !isEmpty(name) || !isEmpty(namaToko)
+                || !isEmpty(alamatToko) || !isEmpty(nomorTelepon)) {
+
+            signUp(email, password, name, nomorTelepon, alamatToko, namaToko);
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Fill all the field", Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
+
 
     private void signUp(final String email, String password, String name, String nomorTelepon,
                         String alamatToko, String namaToko){
@@ -92,15 +101,32 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete" +
                                 task.isSuccessful());
-                        if (!task.isSuccessful()){
+                        if (task.isSuccessful()){
+
+                            FirebaseUser firebaseUser = fAuth.getCurrentUser();
+                            assert firebaseUser != null;
+                            String keyUser = firebaseUser.getUid();
+
+                            User user = new User(keyUser, email, name, nomorTelepon,
+                                    alamatToko,namaToko);
+
+                            databaseReference.child(keyUser).setValue(user).addOnCompleteListener(
+                                    new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(RegisterActivity.this, "Register Success",
+                                                Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                    }
+                                }
+                            });
+
+                        } else{
                             task.getException().printStackTrace();;
                             Snackbar.make(findViewById(R.id.btnSignup), "Register Failed",
                                     Snackbar.LENGTH_LONG).show();
-                        } else{
-                            save(email, name, nomorTelepon, alamatToko, namaToko);
 
-                            Snackbar.make(findViewById(R.id.btnSignup), "Register Success\n" +
-                                    "Email : " + email, Snackbar.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -117,40 +143,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onStop();
         if(fStateListener != null){
             fAuth.removeAuthStateListener(fStateListener);
-        }
-    }
-
-
-    private void save(String email, String name, String nomorTelepon,
-                      String alamatToko, String namaToko){
-
-        if(!isEmpty(email) || !isEmpty(name) || !isEmpty(namaToko)
-            || !isEmpty(alamatToko) || !isEmpty(nomorTelepon)){
-
-            String id = databaseReference.push().getKey();
-            User user = new User(email, name, nomorTelepon,
-                    alamatToko,namaToko);
-
-            databaseReference.child(id).setValue(user).addOnSuccessListener(this,
-                    new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            binding.inputEmail.setText("");
-                            binding.inputName.setText("");
-                            binding.inputNomor.setText("");
-                            binding.inputNamaToko.setText("");
-                            binding.inputAlamatToko.setText("");
-
-                            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
-                            Snackbar.make(findViewById(R.id.btnSignup),"Register Success",
-                                    Snackbar.LENGTH_LONG).show();
-
-                        }
-                    });
-
-        }else{
-            Toast.makeText(getApplicationContext(),"Fill all the field", Toast.LENGTH_SHORT)
-                    .show();
         }
     }
 

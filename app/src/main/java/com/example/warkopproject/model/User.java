@@ -7,12 +7,27 @@ public class User implements Serializable {
     private String keyUser, email, password, name,
             nomorTelepon, alamatToko, namaToko;
 
-    public User(String email, String name,
+    //CONSTRUCTOR
+    public User(){
+
+    }
+
+    public User(String keyUser, String email, String name,
                 String nomorTelepon, String alamatToko, String namaToko) {
+        this.keyUser = keyUser;
         this.email = email;
         this.name = name;
         this.nomorTelepon = nomorTelepon;
         this.alamatToko = alamatToko;
+        this.namaToko = namaToko;
+    }
+
+    public String getKeyUser() {
+        return keyUser;
+    }
+
+    public void setKeyUser(String keyUser) {
+        this.keyUser = keyUser;
     }
 
     public String getEmail() {
@@ -62,7 +77,5 @@ public class User implements Serializable {
     public void setNamaToko(String namaToko) {
         this.namaToko = namaToko;
     }
-
-
 
 }

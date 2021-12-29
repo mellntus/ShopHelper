@@ -1,4 +1,4 @@
-package com.example.warkopproject.page.home;
+package com.example.warkopproject.page.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.warkopproject.R;
-import com.example.warkopproject.adapter.AdapterBarangRecyclerView;
-import com.example.warkopproject.databinding.FragmentHomeBinding;
-import com.example.warkopproject.model.Barang;
+import com.example.warkopproject.adapter.AdapterMenuProductRecyclerView;
+import com.example.warkopproject.databinding.FragmentListBinding;
+import com.example.warkopproject.model.MenuProduct;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,18 +26,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+public class ListFragment extends Fragment {
 
-public class HomeFragment extends Fragment {
-
-    private DatabaseReference database;
-    private RecyclerView rvView;
+    private DatabaseReference databaseReference;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Barang> daftarBarang;
+    RecyclerView.LayoutManager layoutManager;
+    private ArrayList<MenuProduct> arrayMenu;
     private FirebaseUser user;
     String uid;
 
-    FragmentHomeBinding binding;
+    FragmentListBinding binding;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,24 +46,24 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(getLayoutInflater());
+        binding = FragmentListBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
 
-        daftarBarang =new ArrayList<>();
-        database = FirebaseDatabase
+        arrayMenu = new ArrayList<>();
+        databaseReference = FirebaseDatabase
                 .getInstance("https://warkopproject-dfeab-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference();
 
-        database.child("stock_item").child(uid).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("menu").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot noteDataSnapshot : snapshot.getChildren()){
-                    Barang barang = noteDataSnapshot.getValue(Barang.class);
-                    barang.setKey(noteDataSnapshot.getKey());
-                    daftarBarang.add(barang);
+                for (DataSnapshot noteDataSnapshot : snapshot.getChildren()){
+                    MenuProduct menuProduct = noteDataSnapshot.getValue(MenuProduct.class);
+                    menuProduct.setKey(noteDataSnapshot.getKey());
+                    arrayMenu.add(menuProduct);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -76,25 +74,26 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.ftAddStock.setOnClickListener(new View.OnClickListener() {
+        binding.ftAddMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(),CreateStockActivity.class));
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CreateMenuActivity.class));
             }
         });
-        rvView = (RecyclerView)view.findViewById(R.id.rvStockBarang);
-        rvView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(getContext());
-        rvView.setLayoutManager(layoutManager);
-        adapter = new AdapterBarangRecyclerView(daftarBarang,getContext());
-        rvView.setAdapter(adapter);
 
-            // Inflate the layout for this fragment
+        binding.rvMenuBarang.setHasFixedSize(true);
+        layoutManager= new LinearLayoutManager(getContext());
+
+        binding.rvMenuBarang.setLayoutManager(layoutManager);
+
+        adapter = new AdapterMenuProductRecyclerView(arrayMenu, getContext());
+        binding.rvMenuBarang.setAdapter(adapter);
+
         return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
     }

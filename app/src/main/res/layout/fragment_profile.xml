@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     tools:context=".page.profile.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -31,6 +30,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/adamina"
                 android:text="User Profile"
+                android:textAlignment="center"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Erlangga AH"
+                android:text=""
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="erlangga.adidarma@gmail.com"
+                android:text=""
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
@@ -87,7 +87,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="0895323858132"
+                android:text=""
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
@@ -106,7 +106,26 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Kedai Kopi Merdeka"
+                android:text=""
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Alamat Toko"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profile_alamatToko"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text=""
                 android:textSize="15dp"
                 android:textStyle="bold" />
 

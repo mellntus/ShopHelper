@@ -48,8 +48,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = binding.inputEmail.getText().toString();
                 String password = binding.inputPass.getText().toString();
+                if(!email.isEmpty() || !password.isEmpty()) {
+                    login(email, password);
+                }else{
+                    Toast.makeText(LoginActivity.this, "Login Failed\n",
+                            Toast.LENGTH_SHORT).show();
 
-                login(email, password);
+                }
             }
         });
 
@@ -85,6 +90,5 @@ public class LoginActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(),"Wrong Email or Pass", Toast.LENGTH_SHORT).show();
 //        }
     }
-
 
 }

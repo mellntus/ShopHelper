@@ -6,8 +6,8 @@ public class Barang implements Serializable {
     private String namaBarang, kategoriBarang, key;
     private Integer stockBarang;
 
+    //CONSTRUCTOR
     public Barang(){
-
     }
 
     public Barang(String namaBarang, String kategoriBarang, Integer stockBarang) {

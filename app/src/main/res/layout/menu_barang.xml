@@ -22,12 +22,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Item Name: "
+                android:text="Menu Name: "
                 android:fontFamily="@font/poppins_bold"
                 android:layout_margin="8dp"
                 android:textSize="14sp"/>
             <TextView
-                android:id="@+id/tv_namabarang"
+                android:id="@+id/tv_menuNama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Item Stock: "
+                android:text="Menu Price "
                 android:fontFamily="@font/poppins_bold"
                 android:layout_margin="8dp"
                 android:textSize="14sp"
@@ -53,7 +53,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/tv_stockBarangCard"
+                android:id="@+id/tv_menuPrice"
                 android:fontFamily="@font/poppins_bold"
                 android:layout_margin="8dp"
                 android:textColor="#616161"
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Item Category: "
+                android:text="Menu Category: "
                 android:fontFamily="@font/poppins_bold"
                 android:layout_margin="8dp"
                 android:textSize="14sp"
@@ -76,34 +76,43 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/tv_barangCategory"
+                android:id="@+id/tv_menuCategory"
                 android:fontFamily="@font/poppins_bold"
                 android:layout_margin="8dp"
                 android:textColor="#616161"
                 android:textSize="14sp"/>
 
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="right">
-        <TextView
-            android:id="@+id/editButton"
-            android:text="EDIT"
-            android:textSize="14sp"
-            android:textColor="@color/teal_700"
-            android:layout_margin="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="right">
+            <TextView
+                android:id="@+id/addToCartMenu"
+                android:text="CART"
+                android:textSize="14sp"
+                android:textColor="@color/teal_700"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-<!--        <ImageView-->
-<!--            android:id="@+id/deleteButton"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/ic_baseline_delete_24"/>-->
-    </LinearLayout>
+            <TextView
+                android:id="@+id/editMenuButton"
+                android:text="EDIT"
+                android:textSize="14sp"
+                android:textColor="@color/teal_700"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <!--        <ImageView-->
+            <!--            android:id="@+id/deleteButton"-->
+            <!--            android:layout_margin="8dp"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:src="@drawable/ic_baseline_delete_24"/>-->
+        </LinearLayout>
 
     </LinearLayout>
 

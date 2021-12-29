@@ -12,28 +12,32 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.warkopproject.adapter.AdapterBarangRecyclerView;
+import com.example.warkopproject.adapter.AdapterMenuProductRecyclerView;
 import com.example.warkopproject.databinding.ActivityMainBinding;
 import com.example.warkopproject.model.Barang;
+import com.example.warkopproject.model.MenuProduct;
 import com.example.warkopproject.page.history.HistoryFragment;
 import com.example.warkopproject.page.home.HomeFragment;
-import com.example.warkopproject.page.listMenu.ListFragment;
+import com.example.warkopproject.page.menu.ListFragment;
 import com.example.warkopproject.page.profile.ProfileFragment;
-import com.example.warkopproject.page.stock.StockFragment;
+import com.example.warkopproject.page.order.OrderFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class MainActivity extends AppCompatActivity implements AdapterBarangRecyclerView.FirebaseDataListener {
+public class MainActivity extends AppCompatActivity implements AdapterBarangRecyclerView.FirebaseDataListener,
+        AdapterMenuProductRecyclerView.FirebaseDataListener {
 
     private DatabaseReference databaseReference;
     private FirebaseAuth fAuth;
     private FirebaseAuth.AuthStateListener fStateListener;
+    private FirebaseUser user;
     private static final String TAG = LoginActivity.class.getSimpleName();
+    String uid;
 
     ActivityMainBinding binding;
 
@@ -42,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements AdapterBarangRecy
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -68,12 +75,12 @@ public class MainActivity extends AppCompatActivity implements AdapterBarangRecy
 
         listener();
 
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        setSupportActionBar(binding.toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         databaseReference = FirebaseDatabase
                 .getInstance("https://warkopproject-dfeab-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("stock_item");
+                .getReference();
 
     }
 
@@ -104,12 +111,12 @@ public class MainActivity extends AppCompatActivity implements AdapterBarangRecy
                         ft.commit();
                         break;
                     case R.id.m_menu:
-                        ft.replace(R.id.fragment_container, new StockFragment());
+                        ft.replace(R.id.fragment_container, new ListFragment());
                         ft.addToBackStack(null);
                         ft.commit();
                         break;
                     case R.id.m_order:
-                        ft.replace(R.id.fragment_container, new ListFragment());
+                        ft.replace(R.id.fragment_container, new OrderFragment());
                         ft.addToBackStack(null);
                         ft.commit();
                         break;
@@ -140,9 +147,26 @@ public class MainActivity extends AppCompatActivity implements AdapterBarangRecy
         return super.onOptionsItemSelected(item);
     }
 
+    //DELETE STOCK
     @Override
     public void onDeleteData(Barang barang, int position) {
-        databaseReference.child(barang.getKey()).removeValue().addOnSuccessListener
+
+        databaseReference.child("stock_item").child(uid).child(barang.getKey()).removeValue().addOnSuccessListener
+                (new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(MainActivity.this,"success delete",
+                                Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                });
+    }
+
+    @Override
+    public void onDeleteData(MenuProduct menuProduct, int position) {
+
+        databaseReference.child("menu").child(uid).child(menuProduct.getKey()).removeValue().addOnSuccessListener
                 (new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

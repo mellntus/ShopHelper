@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WarkopProject">
         <activity
-            android:name=".CreateStockActivity"
+            android:name=".page.menu.CreateMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".page.home.CreateStockActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

@@ -1,8 +1,7 @@
-package com.example.warkopproject;
+package com.example.warkopproject.page.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.warkopproject.R;
 import com.example.warkopproject.model.Barang;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -94,7 +94,7 @@ public class CreateStockActivity extends AppCompatActivity {
 
                                 Snackbar.make(findViewById(R.id.buttonAdd),"Data inserted",
                                         Snackbar.LENGTH_LONG).show();
-                                startActivity(new Intent(CreateStockActivity.this, MainActivity.class));
+                                CreateStockActivity.this.finish();
                             }
                         });
             }else{
@@ -106,7 +106,7 @@ public class CreateStockActivity extends AppCompatActivity {
 
     private void updateBarang(Barang barang) {
         String id = barang.getKey();
-        databaseReference //akses parent index, ibaratnya seperti nama tabel
+        databaseReference.child(uid) //akses parent index, ibaratnya seperti nama tabel
                 .child(id) //select barang berdasarkan key
                 .setValue(barang) //set value barang yang baru
                 .addOnSuccessListener(this, new OnSuccessListener<Void>() {
@@ -114,8 +114,8 @@ public class CreateStockActivity extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_LONG)
                                 .show();
-                        finish();
-                        startActivity(new Intent(CreateStockActivity.this, MainActivity.class));
+                        CreateStockActivity.this.finish();
+
                     }
                 });
     }
